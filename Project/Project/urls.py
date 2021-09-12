@@ -7,6 +7,9 @@ from users import views as user_views
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from django.conf import settings
+from chat.views import index
+
+
 
 ####################
 
@@ -36,6 +39,7 @@ router.register(r'groups', user_views.GroupViewSet)
 #####################
 
 urlpatterns = [
+    path('chat/', include('chat.urls')),
     path('admin/', admin.site.urls),
     path('', include('social.urls')),
     path('users1/', user_views.users_list, name='users_list'),

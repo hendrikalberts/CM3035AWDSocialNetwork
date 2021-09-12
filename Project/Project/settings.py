@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # Login via Google as an exemple, you can choose facebook, twitter as you like
-    'allauth.socialaccount.providers.google'
+    'chat',
+    'channels',
+    'django_nose',
 ]
 
 SITE_ID = 1
@@ -73,6 +74,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Project.wsgi.application'
+ASGI_APPLICATION = 'Project.routing.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+    },
+}
 
 
 # Database
@@ -86,10 +97,9 @@ DATABASES = {
         'PASSWORD': '12345',
         'HOST': 'localhost',
         'PORT': '3306',
+        'TEST': {'NAME': 'socialnetwork_test',},
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

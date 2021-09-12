@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from chat import views as chatviews
 from .views import PostUpdateView, PostListView, UserPostListView
 
 urlpatterns=[
 	path('', PostListView.as_view(), name='home'),
 	path('post/new/', views.create_post, name='post-create'),
+	path('chat/', chatviews.index, name='chat'),
 	path('post/<int:pk>/', views.post_detail, name='post-detail'),
 	path('like/', views.like, name='post-like'),
 	path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
